@@ -13,7 +13,7 @@ const sex = ref('')
 </script>
 
 <template>
-  <div id="container">
+  <div class="container">
     <div>
       <input type="text" v-model="name" placeholder="Nome" minlength="2" maxlength="40 " />
     </div>
@@ -32,6 +32,7 @@ const sex = ref('')
     <div>
       <input v-model="city" placeholder="Cidade" />
     </div>
+    <div class="box1">
     <div>
       <select v-model="state">
         <option value="">Estado</option>
@@ -63,26 +64,42 @@ const sex = ref('')
         <option value="SE">Sergipe</option>
         <option value="TO">Tocantins</option>
       </select>
+      
     </div>
     <div>
-      <input type="date" v-model="date" />
+      <p>Data de nascimento:</p>
+      <input type="date" v-model="date" min="1920-01-01" max="2023-04-14"/>  
     </div>
     <div>
+      <p>Gênero:</p>
+    </div>
+    <div>
+      <div>
       <input type="radio" v-model="sex" value="male" />Masculino
+    </div>
+    <div>
       <input type="radio" v-model="sex" value="female" />Feminino
+    </div>
+    <div>
       <input type="radio" v-model="sex" value="other" />Outro
     </div>
+    </div>
+  </div>
   </div>
 </template>
 
 <style scoped>
-#container{
+.container{
   padding: 15%;
   background-color: royalblue;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
-  
-  }
+  padding: 40px 50px 40px 50px;
+}
+.box1{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 </style>
