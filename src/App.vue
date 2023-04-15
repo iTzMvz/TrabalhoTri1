@@ -1,39 +1,38 @@
 <script setup>
 import { ref } from 'vue'
 
-const name = ref('')
+const nome = ref('')
 const email = ref('')
-const password = ref('')
-const confirmPassword = ref('')
-const address = ref('')
-const city = ref('')
-const state = ref('')
-const date = ref('')
-const sex = ref('')
+const senha = ref('')
+const confirmaSenha = ref('')
+const endereco = ref('')
+const cidade = ref('')
+const estado = ref('')
+const data = ref('')
+const genero = ref('')
 const bio = ref('')
 const hobbies = ref('')
-const programLanguage = ref([])
-const send = ref(false)
-const contador = ref(0)
+const linguagemProgramacao = ref([])
+const enviar = ref(false)
 
-function confirm() {
-  if (password.value != confirmPassword.value) {
+
+function confirmar() {
+  if (senha.value != confirmaSenha.value) {
     alert('senha incorreta')  
   } else {
-    send.value = !send.value
-    return console.log(contador.value++)
+    return enviar.value = !enviar.value
   }
 }
 </script>
 
 <template>
   <div class="container">
-    <form @submit.prevent = 'send = confirm()'>
+    <form @submit.prevent = 'enviar = confirmar()'>
     <div class="login">
       <h1>Insira Suas Informações</h1>
       <div class="input-field">
         <label>Nome</label>
-        <input type="text" v-model="name"  placeholder="Nome" minlength="1" maxlength="40 " />
+        <input type="text" v-model="nome"  placeholder="Nome" minlength="1" maxlength="40 " />
       </div>
       <div class="input-field">
         <label>Email</label>
@@ -41,23 +40,23 @@ function confirm() {
       </div>
       <div class="input-field">
         <label>Senha:</label>
-        <input type="password" v-model="password" minlength="1" maxlength="20" placeholder="Senha" />
+        <input type="password" v-model="senha" minlength="1" maxlength="20" placeholder="Senha" />
       </div>
       <div class="input-field">
         <label>Confirme a Senha:</label>
-        <input type="password" v-model="confirmPassword" minlength="1" maxlength="20" placeholder="Confirmar senha" />
+        <input type="password" v-model="confirmaSenha" minlength="1" maxlength="20" placeholder="Confirmar senha" />
       </div>
       <div class="input-field">
         <label>Endereço:</label>
-        <input type="text" v-model="address" minlength="1" placeholder="Endereço" />
+        <input type="text" v-model="endereco" minlength="1" placeholder="Endereço" />
       </div>
       <div class="input-field">
         <label>Cidade:</label>
-        <input type="text" v-model="city" minlength="1" placeholder="Cidade" />
+        <input type="text" v-model="cidade" minlength="1" placeholder="Cidade" />
       </div>
       <div class="input-field">
         <label>Estado</label>
-        <select style="margin-top: 0" v-model="state">
+        <select style="margin-top: 0" v-model="estado">
           <option value="">Estado</option>
           <option value="AC">Acre</option>
           <option value="AL">Alagoas</option>
@@ -90,41 +89,41 @@ function confirm() {
       </div>
       <div class="input-field">
         <label>Data de nascimento:</label>
-        <input type="date" v-model="date" min="1920-01-01" max="2023-04-14" />
+        <input type="date" v-model="data" min="1920-01-01" max="2023-04-14" />
       </div>
       <div class="input-field">
         <label>Gênero:</label>
         <div class="input-radio">
           <div class="radio-item">
-            <input type="radio" v-model="sex" value="Masculino" /><span>Masculino</span>
+            <input type="radio" v-model="genero" value="Masculino" /><span>Masculino</span>
           </div>
           <div class="radio-item">
-            <input type="radio" v-model="sex" value="Feminino" /><span>Feminino</span>
+            <input type="radio" v-model="genero" value="Feminino" /><span>Feminino</span>
           </div>
           <div class="radio-item">
-            <input type="radio" v-model="sex" value="Outro" /><span>Outro</span>
+            <input type="radio" v-model="genero" value="Outro" /><span>Outro</span>
           </div>
         </div>
       </div>
       <div class="input-field">
         <label for="linguagemprogram">Linguagem de programação:</label>
         <p>
-          <input type="checkbox" v-model="programLanguage" value="Java" />Java
+          <input type="checkbox" v-model="linguagemProgramacao" value="Java" />Java
         </p>
         <p>
-          <input type="checkbox" v-model="programLanguage" value="Python" />Python
+          <input type="checkbox" v-model="linguagemProgramacao" value="Python" />Python
         </p>
         <p>
-          <input type="checkbox" v-model="programLanguage" value="JavaScript" />JavaScript
+          <input type="checkbox" v-model="linguagemProgramacao" value="JavaScript" />JavaScript
         </p>
         <p>
-          <input type="checkbox" v-model="programLanguage" value="C#">C#
+          <input type="checkbox" v-model="linguagemProgramacao" value="C#">C#
         </p>
         <p>
-          <input type="checkbox" v-model="programLanguage" value="C++">C++
+          <input type="checkbox" v-model="linguagemProgramacao" value="C++">C++
         </p>
         <p>
-          <input type="checkbox" v-model="programLanguage" value="Outro">Outro
+          <input type="checkbox" v-model="linguagemProgramacao" value="Outro">Outro
         </p>
       </div>
       <div class="input-field">
@@ -135,21 +134,21 @@ function confirm() {
         <label>Biografia:</label>
         <textarea v-model="bio" minlength="1" maxlength="200" placeholder="Biografia"></textarea>
       </div>
-      <input type="submit" @click="confirm">
+      <button type="submit" value="confirm">Enviar</button>
     </div>
     <div class="info">
-      <div v-if="send" >
+      <div v-if="enviar">
         <h1>Suas Informações</h1>
-        <p class="box">Nome: {{ name }}</p>
+        <p class="box">Nome: {{ nome }}</p>
         <p class="box">Email: {{ email }}</p>
-        <p class="box">Senha: {{ password }}</p>
-        <p class="box">Data de nascimento: {{ date }}</p>
-        <p class="box">Estado: {{ state }}</p>
-        <p class="box">Cidade: {{ city }}</p>
-        <p class="box">Endereço: {{ address }}</p>
-        <p class="box">Gênero: {{ sex }}</p>
+        <p class="box">Senha: {{ senha }}</p>
+        <p class="box">Data de nascimento: {{ data }}</p>
+        <p class="box">Estado: {{ estado }}</p>
+        <p class="box">Cidade: {{ cidade }}</p>
+        <p class="box">Endereço: {{ endereco }}</p>
+        <p class="box">Gênero: {{ genero }}</p>
         <p class="box">Hobbie: {{ hobbies }}</p>
-        <p class="box">Linguagem de Programação: {{ programLanguage.join(", ") }}</p>
+        <p class="box">Linguagem de Programação: {{ linguagemProgramacao.join(", ") }}</p>
         <p class="box">Biografia: {{ bio }}</p>
       </div>
     </div>
@@ -179,6 +178,12 @@ button {
   margin: 5px 5px 20px 5px;
   padding: 5px 10px 5px 10px;
   border-radius: 3px;
+  background-color: #C7D1D9;
+}
+button:hover{
+  transition: 0.9s;
+  background-color: #1A2126;
+  color: white;
 }
 textarea{
   background-color: #C7D1D9;
