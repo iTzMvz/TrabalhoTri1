@@ -10,45 +10,50 @@ const city = ref('')
 const state = ref('')
 const date = ref('')
 const sex = ref('')
-const biografia = ref('')
+const bio = ref('')
+const hobbies = ref('')
+const programLanguage = ref([])
 const send = ref(false)
+const contador = ref(0)
 
 function confirm() {
   if (password.value != confirmPassword.value) {
-    alert('senha incorreta')
+    alert('senha incorreta')  
   } else {
     send.value = !send.value
+    return console.log(contador.value++)
   }
 }
 </script>
 
 <template>
   <div class="container">
+    <form @submit.prevent = 'send = confirm()'>
     <div class="login">
       <h1>Insira Suas Informações</h1>
       <div class="input-field">
         <label>Nome</label>
-        <input type="text" v-model="name" placeholder="Nome" minlength="2" maxlength="40 " />
+        <input type="text" v-model="name"  placeholder="Nome" minlength="1" maxlength="40 " />
       </div>
       <div class="input-field">
         <label>Email</label>
-        <input type="email" v-model="email" placeholder="Email" />
+        <input type="email" v-model="email" minlength="1" placeholder="Email" />
       </div>
       <div class="input-field">
         <label>Senha:</label>
-        <input type="password" v-model="password" placeholder="Senha" />
+        <input type="password" v-model="password" minlength="1" maxlength="20" placeholder="Senha" />
       </div>
       <div class="input-field">
         <label>Confirme a Senha:</label>
-        <input type="password" v-model="confirmPassword" placeholder="Confirmar senha" />
+        <input type="password" v-model="confirmPassword" minlength="1" maxlength="20" placeholder="Confirmar senha" />
       </div>
       <div class="input-field">
         <label>Endereço:</label>
-        <input type="text" v-model="address" placeholder="Endereço" />
+        <input type="text" v-model="address" minlength="1" placeholder="Endereço" />
       </div>
       <div class="input-field">
         <label>Cidade:</label>
-        <input v-model="city" placeholder="Cidade" />
+        <input type="text" v-model="city" minlength="1" placeholder="Cidade" />
       </div>
       <div class="input-field">
         <label>Estado</label>
@@ -102,13 +107,38 @@ function confirm() {
         </div>
       </div>
       <div class="input-field">
-        <label>Biografia:</label>
-        <input type="text" v-model="biografia" placeholder="Biografia" style="margin-bottom: 20px;">
+        <label for="linguagemprogram">Linguagem de programação:</label>
+        <p>
+          <input type="checkbox" v-model="programLanguage" value="Java" />Java
+        </p>
+        <p>
+          <input type="checkbox" v-model="programLanguage" value="Python" />Python
+        </p>
+        <p>
+          <input type="checkbox" v-model="programLanguage" value="JavaScript" />JavaScript
+        </p>
+        <p>
+          <input type="checkbox" v-model="programLanguage" value="C#">C#
+        </p>
+        <p>
+          <input type="checkbox" v-model="programLanguage" value="C++">C++
+        </p>
+        <p>
+          <input type="checkbox" v-model="programLanguage" value="Outro">Outro
+        </p>
       </div>
-      <button type="button" @click="confirm">enviar</button>
+      <div class="input-field">
+        <label>Hobbies:</label>
+        <input type="text" v-model="hobbies" minlength="1" placeholder="Hobbies">
+      </div>
+      <div class="input-field">
+        <label>Biografia:</label>
+        <textarea v-model="bio" minlength="1" maxlength="200" placeholder="Biografia"></textarea>
+      </div>
+      <input type="submit" @click="confirm">
     </div>
-    <div>
-      <div v-if="send">
+    <div class="info">
+      <div v-if="send" >
         <h1>Suas Informações</h1>
         <p class="box">Nome: {{ name }}</p>
         <p class="box">Email: {{ email }}</p>
@@ -118,17 +148,46 @@ function confirm() {
         <p class="box">Cidade: {{ city }}</p>
         <p class="box">Endereço: {{ address }}</p>
         <p class="box">Gênero: {{ sex }}</p>
-        <p class="box">Hobbie: {{ hobbie }}</p>
-        <p class="box">Linguagem de Programação: {{ linguagemProg }}</p>
-        <p style="white-space: pre-line" class="box">Biografia: {{ biografia }}</p>
+        <p class="box">Hobbie: {{ hobbies }}</p>
+        <p class="box">Linguagem de Programação: {{ programLanguage.join(", ") }}</p>
+        <p class="box">Biografia: {{ bio }}</p>
       </div>
     </div>
+  </form>
   </div>
 </template>
 
 <style scoped>
+
+input {
+  border-radius: 6px;
+  padding: 5px;
+  margin-top: 10px;
+  background-color: #C7D1D9;
+  box-shadow: 4px 7px 7px #1A2126;
+}
+
+select {
+  border-radius: 6px;
+  padding: 5px;
+  margin-top: 10px;
+  background-color: #C7D1D9;
+  box-shadow: 4px 7px 7px #1A2126;  
+}
+
+button {
+  margin: 5px 5px 20px 5px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 3px;
+}
+textarea{
+  background-color: #C7D1D9;
+  box-shadow: 4px 7px 7px #1A2126;  
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
 .container {
-  background-color: blue;
+  background-color: #434F59;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,24 +196,11 @@ function confirm() {
   width: 450px;
   margin: 50px auto;
 }
+
 .box {
   margin: 0 0 5px 0;
 }
-input {
-  border-radius: 6px;
-  padding: 5px;
-  margin-top: 10px;
-}
-select {
-  border-radius: 6px;
-  padding: 5px;
-  margin-top: 10px;
-}
-button {
-  margin: 5px;
-  padding: 5px 10px 5px 10px;
-  border-radius: 3px;
-}
+
 .login {
   display: flex;
   flex-direction: column;
@@ -184,4 +230,10 @@ button {
 .input-field .input-radio span {
   margin-right: 30px;
 }
+
+.info{
+  word-wrap: break-word;
+  line-break: anywhere;
+}
+
 </style>
